@@ -30,6 +30,13 @@ else:
 from aws.pdfbook.interfaces import IPDFOptions
 from aws.pdfbook import logger
 
+#blind check
+try:
+    from plone.scale.storage import AnnotationStorage
+    from plone.namedfile.scaling import ImageScale
+    from zope.publisher.browser import TestRequest
+except:
+    AnnotationStorage = Null
 
 CHAR_MAPPING = {
     u"'": u'\u2019', # Apostrophe Windoz
@@ -70,7 +77,9 @@ def get_image_data(item):
     elif IImage.providedBy(item):
         return item.data
     else:
-        return getattr(item, 'data', '')
+        #exta level to deal with image scales
+        data = getattr(item, 'data', '')
+        return data.data if hasattr(data, 'data') else data
 
 
 def _write_file(data, fsinfo, filename):
@@ -180,6 +189,19 @@ class RecodeParser(HTMLParser.HTMLParser):
                 except:
                     logger.debug("Failed to get image from context path %s",
                                  image)
+
+            if not item:
+                # plone.app.imaging
+                if '@@images' in path and AnnotationStorage:
+                    context_path, images_str, uid_filename = path.rsplit('/', 2)
+                    image_context = portal.restrictedTraverse(context_path)
+                    uid, ext = uid_filename.rsplit('.', 1)
+                    storage = AnnotationStorage(image_context)
+                    info = storage.get(uid)
+                    if info is not None:
+                        request = TestRequest()
+                        scale_view = ImageScale(image_context, request, **info)
+                        item = scale_view.__of__(image_context)
 
             if not item:
                 # absolute url
