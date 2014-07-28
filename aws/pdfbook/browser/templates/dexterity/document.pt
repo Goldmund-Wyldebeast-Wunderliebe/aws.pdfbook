@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="plone"
+      metal:use-macro="view/context/@@aws.pdfbook.htmlmaster/page">
+
+  <div metal:fill-slot="body">
+    <metal:body define-macro="body">
+
+      <h1 tal:content="context/title"/>
+
+      <p>
+        <strong tal:content="context/description"/>
+      </p>
+
+      <hr />
+
+        <div id="parent-fieldname-text"
+             tal:condition="context/text"
+             tal:content="structure context/text/output" />
+
+    </metal:body>
+  </div>
+</html>

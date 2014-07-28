@@ -78,4 +78,15 @@
      template="templates/attopic.pt"
      />
 
+  <configure zcml:condition="installed plone.app.contenttypes">
+      <browser:page
+         name="printlayout"
+         for="plone.app.contenttypes.interfaces.IDocument"
+         layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
+         permission="zope.Public"
+         template="templates/dexterity/document.pt"
+         />
+  </configure>
+
+
 </configure>
