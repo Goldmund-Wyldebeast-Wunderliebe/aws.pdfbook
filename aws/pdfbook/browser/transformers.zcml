@@ -1,5 +1,6 @@
 <configure
    xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
    xmlns:browser="http://namespaces.zope.org/browser"
    i18n_domain="pdfbook"
    >
@@ -81,10 +82,40 @@
   <configure zcml:condition="installed plone.app.contenttypes">
       <browser:page
          name="printlayout"
+         for="plone.dexterity.interfaces.IDexterityContent"
+         layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
+         class=".transformers.DefaultLayout"
+         permission="zope.Public"
+         template="templates/defaultlayout.pt"
+         />
+      <browser:page
+         name="printlayout"
          for="plone.app.contenttypes.interfaces.IDocument"
          layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
          permission="zope.Public"
          template="templates/dexterity/document.pt"
+         />
+      <browser:page
+         name="printlayout"
+         for="plone.app.contenttypes.interfaces.IEvent"
+         layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
+         permission="zope.Public"
+         template="templates/dexterity/newsitem.pt"
+         />
+      <browser:page
+         name="printlayout"
+         for="plone.app.contenttypes.interfaces.INewsItem"
+         layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
+         permission="zope.Public"
+         template="templates/dexterity/event.pt"
+         />
+      <browser:page
+         name="printlayout"
+         class=".transformers.DexterityFolderLayout"
+         for="plone.app.contenttypes.interfaces.IFolder"
+         layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
+         permission="zope.Public"
+         template="templates/dexterity/folder.pt"
          />
   </configure>
 

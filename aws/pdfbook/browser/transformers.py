@@ -60,6 +60,13 @@ class FolderLayout(AbstractFolderishLayout):
         context = aq_inner(self.context)
         return context.folderlistingFolderContents(suppressHiddenFiles=True)
 
+class DexterityFolderLayout(AbstractFolderishLayout):
+    """For any folder or subclass
+    """
+    def _collectItems(self):
+        context = aq_inner(self.context)
+        return context.listFolderContents()
+
 
 class TopicLayout(AbstractFolderishLayout):
     """For any Colletcion/Topic and subclasses
