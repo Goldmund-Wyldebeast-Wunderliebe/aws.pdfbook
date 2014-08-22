@@ -7,7 +7,9 @@
       metal:use-macro="view/context/@@aws.pdfbook.htmlmaster/page">
 
   <div metal:fill-slot="body">
-    <metal:body define-macro="body">
+    <metal:body define-macro="body"
+                tal:define="scale_func context/@@images;
+                scaled_image python: context.image and scale_func.scale('image', scale='mini')">
 
       <h1 tal:content="context/title"/>
 
