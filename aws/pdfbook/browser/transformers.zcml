@@ -97,14 +97,14 @@
          />
       <browser:page
          name="printlayout"
-         for="plone.app.contenttypes.interfaces.IEvent"
+         for="plone.app.contenttypes.interfaces.INewsItem"
          layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
          permission="zope.Public"
          template="templates/dexterity/newsitem.pt"
          />
       <browser:page
          name="printlayout"
-         for="plone.app.contenttypes.interfaces.INewsItem"
+         for="plone.app.contenttypes.interfaces.IEvent"
          layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
          permission="zope.Public"
          template="templates/dexterity/event.pt"
