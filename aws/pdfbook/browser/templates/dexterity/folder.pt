@@ -20,9 +20,9 @@
       <div tal:repeat="item view/viewItems">
         <tal:block define="context nocall: item;
                            here nocall: item">
-          <metal:block use-macro="item/@@printlayout/macros/body">
+          <!--metal:block use-macro="item/@@printlayout/macros/body">
             All elements of the folder
-          </metal:block>
+          </metal:block-->
         </tal:block>
       </div>
 
