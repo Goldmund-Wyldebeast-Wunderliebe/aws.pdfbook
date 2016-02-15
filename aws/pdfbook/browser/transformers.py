@@ -74,3 +74,18 @@ class TopicLayout(AbstractFolderishLayout):
     def _collectItems(self):
         context = aq_inner(self.context)
         return context.queryCatalog(full_objects=True)
+
+
+class DexterityFileLayout(BrowserView):
+    """Layout for any folderish content
+    (abstract class must be subclassed)
+    """
+    def getHTML(self):
+        portal_transforms = self.context.portal_transforms
+        obj_file = self.context.file
+        if obj_file:
+            data = portal_transforms.convertTo('text/html', obj_file.data, mimetype=obj_file.contentType)
+            html = data.getData()
+        else:
+            html = ''    
+        return html

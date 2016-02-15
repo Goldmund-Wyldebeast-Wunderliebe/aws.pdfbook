@@ -117,6 +117,14 @@
          permission="zope.Public"
          template="templates/dexterity/folder.pt"
          />
+      <browser:page
+         name="printlayout"
+         class=".transformers.DexterityFileLayout"
+         for="plone.app.contenttypes.interfaces.IFile"
+         layer="aws.pdfbook.interfaces.IAWSPDFBookLayer"
+         permission="zope.Public"
+         template="templates/dexterity/file.pt"
+         />
   </configure>
 
 
