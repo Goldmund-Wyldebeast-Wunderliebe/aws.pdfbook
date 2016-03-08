@@ -5,7 +5,7 @@
 from zope.interface import implements
 from zope.component import adapts
 from zope.formlib import form
-from plone.app.controlpanel.form import ControlPanelForm
+#from plone.app.controlpanel.form import ControlPanelForm
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFDefault.formlib.schema import ProxyFieldProperty
@@ -15,6 +15,7 @@ from Products.CMFPlone.utils import getSiteEncoding
 from aws.pdfbook.interfaces import IPDFOptions
 from aws.pdfbook.config import PROPERTYSHEET
 from aws.pdfbook import translate as _
+from plone.app.registry.browser.controlpanel import RegistryEditForm
 
 
 class PDFOptions(SchemaAdapterBase):
@@ -37,7 +38,7 @@ class PDFOptions(SchemaAdapterBase):
     pdfbook_logo = ProxyFieldProperty(IPDFOptions['pdfbook_logo'])
 
 
-class PDFControlPanel(ControlPanelForm):
+class PDFControlPanel(RegistryEditForm):
 
     label = _(u'label_controlpanel', default=u"PDF book settings")
     description = _(u'help_controlpanel', default=u"Your site wide options for PDF book")
